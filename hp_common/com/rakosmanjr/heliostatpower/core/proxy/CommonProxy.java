@@ -79,6 +79,6 @@ public class CommonProxy
 	
 	public void RegisterWorldGen()
 	{
-		GameRegistry.registerWorldGenerator(new WorldGenerator());
+		GameRegistry.registerWorldGenerator(new WorldGenerator(), 1);
 	}
 }

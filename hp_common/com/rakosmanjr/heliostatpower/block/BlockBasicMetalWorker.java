@@ -14,39 +14,37 @@ import com.rakosmanjr.heliostatpower.lib.GuiIds;
 import com.rakosmanjr.heliostatpower.lib.Reference;
 import com.rakosmanjr.heliostatpower.lib.Strings;
 import com.rakosmanjr.heliostatpower.tileentity.TileBasicMetalWorker;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockBasicMetalWorker extends BlockHeliostat
 {
-	public BlockBasicMetalWorker(int id)
+	public BlockBasicMetalWorker()
 	{
-		super(id, Material.iron, Strings.METAL_WORKER_NAME);
+		super(Material.iron, Strings.METAL_WORKER_NAME);
 		setCreativeTab(HeliostatPower.tabsHP);
 		setHardness(5F);
 		setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
 	}
-	
+
 	@Override
-	public TileEntity createNewTileEntity(World world)
+	public TileEntity createNewTileEntity(World world, int meta)
 	{
 		return new TileBasicMetalWorker();
 	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
@@ -58,13 +56,7 @@ public class BlockBasicMetalWorker extends BlockHeliostat
 	{
 		return false;
 	}
-	
-	@Override
-	public void breakBlock(World world, int x, int y, int z, int id, int meta)
-	{
-		super.breakBlock(world, x, y, z, id, meta);
-	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int par6, float par7, float par8, float par9)
@@ -72,7 +64,7 @@ public class BlockBasicMetalWorker extends BlockHeliostat
 		if (!world.isRemote && !player.isSneaking())
 		{
 			TileBasicMetalWorker tileWorker = (TileBasicMetalWorker)world
-					.getBlockTileEntity(x, y, z);
+					.getTileEntity(x, y, z);
 			
 			if (tileWorker != null)
 			{

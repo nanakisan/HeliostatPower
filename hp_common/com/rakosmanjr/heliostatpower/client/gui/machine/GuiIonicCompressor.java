@@ -9,57 +9,44 @@
  */
 package com.rakosmanjr.heliostatpower.client.gui.machine;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Point;
-import org.w3c.dom.NodeList;
-
-import com.rakosmanjr.heliostatpower.core.helpers.XMLReader;
 import com.rakosmanjr.heliostatpower.gui.machine.ContainerIonicCompressor;
 import com.rakosmanjr.heliostatpower.lib.NameMaps;
 import com.rakosmanjr.heliostatpower.lib.Textures;
-import com.rakosmanjr.heliostatpower.lib.XMLLocations;
 import com.rakosmanjr.heliostatpower.tileentity.TileBasicIonicCompressor;
-
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiIonicCompressor extends GuiContainer
 {
 	private TileBasicIonicCompressor basicIonicCompressor;
-	
-	public GuiIonicCompressor(InventoryPlayer inventoryPlayer,
-			TileBasicIonicCompressor basicIonicCompressor)
+
+	public GuiIonicCompressor(InventoryPlayer inventoryPlayer, TileBasicIonicCompressor basicIonicCompressor)
 	{
-		super(new ContainerIonicCompressor(inventoryPlayer,
-				basicIonicCompressor));
-		
+		super(new ContainerIonicCompressor(inventoryPlayer, basicIonicCompressor));
+
 		this.basicIonicCompressor = basicIonicCompressor;
-			
+
 		ySize = 166;
 		xSize = 176;
 	}
-	
+
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y)
 	{
 		// draw name at (11, 6)
-		String containerName = basicIonicCompressor.isInvNameLocalized() ? basicIonicCompressor
-				.getInvName() : LanguageRegistry.instance()
-				.getStringLocalization(basicIonicCompressor.getInvName());
-		fontRenderer.drawString(containerName, 11, 6, 4210752);
-		
+		String containerName = basicIonicCompressor.getInventoryName();
+		this.fontRendererObj.drawString(containerName, 11, 6, 4210752);
+
 		// draw status at (104, 64)
-		String currentStatus = LanguageRegistry.instance()
-				.getStringLocalization(
-						NameMaps.STATUS_NAMEMAP.get(basicIonicCompressor
-								.GetStatus()));
-		fontRenderer.drawString(currentStatus, 104, 64, 4210752);
+		String currentStatus = LanguageRegistry.instance().getStringLocalization(NameMaps.STATUS_NAMEMAP.get(basicIonicCompressor.GetStatus()));
+		this.fontRendererObj.drawString(currentStatus, 104, 64, 4210752);
 	}
-	
+
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float opacity, int x, int y)
 	{

@@ -9,12 +9,11 @@
  */
 package com.rakosmanjr.heliostatpower.items.crafting;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import com.rakosmanjr.heliostatpower.items.ModItems;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.rakosmanjr.heliostatpower.items.ModItems;
 
 public class Crafting
 {
@@ -23,8 +22,8 @@ public class Crafting
 	 */
 	public static void AddAllRecipes()
 	{
-		ItemStack ironStack = new ItemStack(Item.ingotIron);
-		ItemStack thinGlassStack = new ItemStack(Block.thinGlass);
+		ItemStack ironStack = new ItemStack(Items.iron_ingot);
+		ItemStack thinGlassStack = new ItemStack(Blocks.glass_pane);
 		ItemStack ironWaferStack = new ItemStack(ModItems.ironWafer);
 		ItemStack copperWaferStack = new ItemStack(ModItems.copperWafer);
 		ItemStack silverWaferStack = new ItemStack(ModItems.silverWafer);

@@ -9,51 +9,39 @@
  */
 package com.rakosmanjr.heliostatpower.block;
 
-import java.util.Random;
-
 import com.rakosmanjr.heliostatpower.HeliostatPower;
-import com.rakosmanjr.heliostatpower.items.ModItems;
 import com.rakosmanjr.heliostatpower.lib.Reference;
 import com.rakosmanjr.heliostatpower.lib.Strings;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.client.renderer.texture.IIconRegister;
+
+import java.util.Random;
 
 public class BlockSodiumNitrateCrystal extends BlockSand
 {
-	public BlockSodiumNitrateCrystal(int id)
+	public BlockSodiumNitrateCrystal()
 	{
-		super(id);
-		setUnlocalizedName(Strings.SODIUM_NITRATE_CRYSTAL_NAME);
+		this.setBlockName(Strings.SODIUM_NITRATE_CRYSTAL_NAME);
 		setCreativeTab(HeliostatPower.tabsHP);
 		setHardness(1f);
 		setResistance(5f);
-		setStepSound(Block.soundSandFootstep);
-		MinecraftForge.setBlockHarvestLevel(this, "shovel", 3);
+		this.setStepSound(Block.soundTypeSand);
+		this.setHarvestLevel("shovel", 3);
 	}
-	
-	public int idDropped(int metadata, Random random, int zero)
-	{
-		return ModItems.sodiumNitrate.itemID;
-	}
-	
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
+		this.blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
 	}
-	
+
 	public int quantityDropped(Random random)
 	{
 		double g = random.nextGaussian();
 		double l = 1.0; // lower weight
 		double u = 3.0; // upper weight
-		
-		return (int)(g > 0 ? (g * u) + 3 : (g * l) + 3);
+
+		return (int) (g > 0 ? (g * u) + 3 : (g * l) + 3);
 	}
 }

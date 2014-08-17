@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemCopperWafer extends ItemHeliostat
 {
-	public ItemCopperWafer(int id, String name)
+	public ItemCopperWafer(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

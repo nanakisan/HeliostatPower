@@ -13,8 +13,8 @@ import com.rakosmanjr.heliostatpower.lib.Strings;
 
 public class ItemHighPressureIronWafer extends ItemHeliostat
 {
-	public ItemHighPressureIronWafer(int id, String name)
+	public ItemHighPressureIronWafer(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

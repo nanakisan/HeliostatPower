@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemSilverSpool extends ItemHeliostat
 {
-	public ItemSilverSpool(int id, String name)
+	public ItemSilverSpool(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

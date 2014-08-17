@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemCopperSpool extends ItemHeliostat
 {
-	public ItemCopperSpool(int id, String name)
+	public ItemCopperSpool(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

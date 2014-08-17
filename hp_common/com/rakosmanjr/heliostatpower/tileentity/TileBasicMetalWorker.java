@@ -9,19 +9,18 @@
  */
 package com.rakosmanjr.heliostatpower.tileentity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import com.rakosmanjr.heliostatpower.lib.Strings;
+import com.rakosmanjr.heliostatpower.machine.MachineDrawer;
+import com.rakosmanjr.heliostatpower.machine.MachineMiller;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-import com.rakosmanjr.heliostatpower.machine.MachineDrawer;
-import com.rakosmanjr.heliostatpower.machine.MachineMiller;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class TileBasicMetalWorker extends TileHeliostat implements
+public class TileBasicMetalWorker extends RFPoweredHelioStatTile implements
 		ISidedInventory
 {
 	public final MachineMiller miller;
@@ -31,13 +30,12 @@ public class TileBasicMetalWorker extends TileHeliostat implements
 	
 	public TileBasicMetalWorker()
 	{
+		super(32000);
 		inventory = new ArrayList<ItemStack>(Arrays.asList(new ItemStack[14]));
 		miller = new MachineMiller(inventory.subList(0, 10));
 		drawer = new MachineDrawer(inventory.subList(10, 14));
-		
-		maxEnergy = miller.GetMaxEnergy() + drawer.GetMaxEnergy();
-		
-		SetCustomName(Strings.TE_METAL_WORKER);
+
+		this.setCustomName(Strings.TE_METAL_WORKER);
 	}
 	
 	@Override
@@ -116,19 +114,19 @@ public class TileBasicMetalWorker extends TileHeliostat implements
 		inventory.set(i, itemStack);
 		// SetInventory(i, itemStack);
 	}
-	
+
 	@Override
-	public String getInvName()
+	public String getInventoryName()
 	{
-		return GetCustomName();
+		return this.getCustomName();
 	}
-	
+
 	@Override
-	public boolean isInvNameLocalized()
+	public boolean hasCustomInventoryName()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public int getInventoryStackLimit()
 	{
@@ -138,23 +136,23 @@ public class TileBasicMetalWorker extends TileHeliostat implements
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer)
 	{
-		return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this
+		return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this
 				&& entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5,
 						zCoord + 0.5) < 64;
 	}
-	
+
 	@Override
-	public void openChest()
+	public void openInventory()
 	{
-		
+
 	}
-	
+
 	@Override
-	public void closeChest()
+	public void closeInventory()
 	{
-		
+
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound tag)
 	{

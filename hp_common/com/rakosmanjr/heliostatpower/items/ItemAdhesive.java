@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemAdhesive extends ItemHeliostat
 {
-	public ItemAdhesive(int id, String name)
+	public ItemAdhesive(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

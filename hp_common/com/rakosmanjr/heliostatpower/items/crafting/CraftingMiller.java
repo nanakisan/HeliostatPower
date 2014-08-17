@@ -9,16 +9,14 @@
  */
 package com.rakosmanjr.heliostatpower.items.crafting;
 
+import com.rakosmanjr.heliostatpower.core.helpers.LogHelper;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.item.ItemStack;
+import org.apache.logging.log4j.Level;
+
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-
-import net.minecraft.item.ItemStack;
-
-import com.rakosmanjr.heliostatpower.core.helpers.LogHelper;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 /**
  * Handles all the crafting recipe stuff for the Miller
@@ -26,19 +24,19 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class CraftingMiller implements ICrafting
 {
 	private static CraftingMiller instance = new CraftingMiller();
-	
+
 	private static int nextId = 0;
 	private static Map<Integer, RecipeItem> recipes;
-	
+
 	public static final int GRID_WIDTH = 3;
 	public static final int GRID_HEIGHT = 3;
 	public static final int GRID_TOTAL = GRID_WIDTH * GRID_HEIGHT;
-	
+
 	public CraftingMiller()
 	{
 		recipes = new Hashtable<Integer, RecipeItem>();
 	}
-	
+
 	/**
 	 * Returns the singleton instance
 	 */
@@ -46,92 +44,35 @@ public class CraftingMiller implements ICrafting
 	{
 		return instance;
 	}
-	
+
 	/**
 	 * Add a new recipe to the Miller
-	 * 
-	 * @param result
-	 *            ItemStack for what the recipe gives
-	 * @param maxTick
-	 *            Number of ticks it takes to complete the crafting (Note: 20
-	 *            ticks = 1 second)
-	 * @param recipe
-	 *            Array of ItemStacks representing the crafting grid
-	 *            horizontally, works with stack size!
 	 */
 	@Override
 	public void AddRecipe(RecipeItem recipeItem)
 	{
 		if (recipeItem.recipe.length != GRID_TOTAL)
 		{
-			LogHelper
-					.Log(Level.WARNING,
-							String.format(
-									"Invalid recipe added to Miller! Wrong size!\nRecipeId: %s Result: %s",
-									nextId,
-									LanguageRegistry
-											.instance()
-											.getStringLocalization(
-													recipeItem.result
-															.getItem()
-															.getUnlocalizedName())));
+			LogHelper.log(Level.WARN, String.format("Invalid recipe added to Miller! Wrong size!\nRecipeId: %s Result: %s", nextId, LanguageRegistry.instance().getStringLocalization(recipeItem.result.getItem().getUnlocalizedName())));
 		}
-		
+
 		recipeItem.recipeId = nextId;
-		
+
 		recipes.put(nextId, recipeItem);
 		nextId++;
 	}
-	
-	@Deprecated
-	public int GetRecipeId(ItemStack[] input)
-	{
-		boolean itemFound = true;
-		
-		for (RecipeItem recipe : recipes.values())
-		{
-			for (int i = 0; i < GRID_TOTAL; i++)
-			{
-				if (input[i] == null && recipe.recipe[i] == null)
-				{
-					itemFound = true;
-					continue;
-				}
-				else if ((input[i] != null && recipe.recipe[i] != null)
-						&& (input[i].isItemEqual(recipe.recipe[i])))
-				{
-					if (input[i].stackSize >= recipe.recipe[i].stackSize)
-					{
-						itemFound = true;
-						continue;
-					}
-				}
-				
-				itemFound = false;
-				break;
-			}
-			
-			if (itemFound)
-			{
-				return recipe.recipeId;
-			}
-		}
-		
-		return -1;
-	}
-	
+
 	/**
 	 * Returns the recipeId for the given recipe
-	 * 
-	 * @param input
-	 *            Array of ItemStacks representing the crafting grid
-	 *            horizontally. Must have the proper stack size for each stack!
+	 *
+	 * @param input Array of ItemStacks representing the crafting grid
+	 *              horizontally. Must have the proper stack size for each stack!
 	 */
 	@Override
 	public int GetRecipeId(List<ItemStack> input)
 	{
 		boolean itemFound = true;
-		
+
 		for (RecipeItem recipe : recipes.values())
 		{
 			for (int i = 0; i < GRID_TOTAL; i++)
@@ -141,8 +82,7 @@ public class CraftingMiller implements ICrafting
 					itemFound = true;
 					continue;
 				}
-				else if ((input.get(i) != null && recipe.recipe[i] != null)
-						&& (input.get(i).isItemEqual(recipe.recipe[i])))
+				else if ((input.get(i) != null && recipe.recipe[i] != null) && (input.get(i).isItemEqual(recipe.recipe[i])))
 				{
 					if (input.get(i).stackSize >= recipe.recipe[i].stackSize)
 					{
@@ -150,38 +90,35 @@ public class CraftingMiller implements ICrafting
 						continue;
 					}
 				}
-				
+
 				itemFound = false;
 				break;
 			}
-			
+
 			if (itemFound)
 			{
 				return recipe.recipeId;
 			}
 		}
-		
+
 		return -1;
 	}
-	
+
 	/**
 	 * Gets the max tick for the given recipeId
-	 * 
-	 * @param recipeId
-	 *            Recipe Id gotten from GetRecipeId()
+	 *
+	 * @param recipeId Recipe Id gotten from GetRecipeId()
 	 */
 	public int GetMaxTick(int recipeId)
 	{
 		return recipes.get(recipeId).maxTick;
 	}
-	
+
 	/**
 	 * Gets the stack size for the given crafting slot, for the given recipeId
-	 * 
-	 * @param recipeId
-	 *            Recipe Id gotten from GetRecipeId()
-	 * @param slot
-	 *            Crafting slot number [0, GRID_TOTAL]
+	 *
+	 * @param recipeId Recipe Id gotten from GetRecipeId()
+	 * @param slot     Crafting slot number [0, GRID_TOTAL]
 	 */
 	@Override
 	public int ComponentsUsedInSlot(int recipeId, int slot)
@@ -190,16 +127,15 @@ public class CraftingMiller implements ICrafting
 		{
 			return -1;
 		}
-		
+
 		return recipes.get(recipeId).recipe[slot].stackSize;
 	}
-	
+
 	/**
 	 * Gets the result itemStack for the given recipeId Note: the returned
 	 * itemStack is a reference!
-	 * 
-	 * @param recipeId
-	 *            Recipe Id gotten from GetRecipeId()
+	 *
+	 * @param recipeId Recipe Id gotten from GetRecipeId()
 	 */
 	public ItemStack GetResult(int recipeId)
 	{

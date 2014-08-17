@@ -10,11 +10,18 @@
 package com.rakosmanjr.heliostatpower.creativetab;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class CreativeTabHeliostatPower extends CreativeTabs
 {	
-	public CreativeTabHeliostatPower(int id, String label)
+	public CreativeTabHeliostatPower(String label)
 	{
-		super(id, label);
+		super(label);
+	}
+
+	@Override
+	public Item getTabIconItem()
+	{
+		return null;
 	}
 }

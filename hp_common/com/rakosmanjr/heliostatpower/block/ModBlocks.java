@@ -9,11 +9,6 @@
  */
 package com.rakosmanjr.heliostatpower.block;
 
-import com.rakosmanjr.heliostatpower.core.helpers.LocalizationHelper;
-import com.rakosmanjr.heliostatpower.lib.BlockIds;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
-
 import net.minecraft.block.Block;
 
 public class ModBlocks
@@ -24,11 +19,8 @@ public class ModBlocks
 	
 	public static void Init()
 	{
-		sodiumNitrateCrystal = new BlockSodiumNitrateCrystal(BlockIds.SODIUM_NITRATE_CRYSTAL_DEFAULT);
-		basicIonicCompressor = new BlockBasicIonicCompressor(BlockIds.BASIC_IONIC_COMPRESSOR_DEFAULT);
-		basicMetalWorker = new BlockBasicMetalWorker(BlockIds.BASIC_METAL_WORKER_DEFAULT);
-		
-		LanguageRegistry.addName(basicIonicCompressor, "Basic Ionic Compressor");
-		LanguageRegistry.addName(basicMetalWorker, "Basic Metal Worker");
+		sodiumNitrateCrystal = new BlockSodiumNitrateCrystal();
+		basicIonicCompressor = new BlockBasicIonicCompressor();
+		basicMetalWorker = new BlockBasicMetalWorker();
 	}
 }

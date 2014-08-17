@@ -9,21 +9,16 @@
  */
 package com.rakosmanjr.heliostatpower.client.gui.machine;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
-import org.w3c.dom.NodeList;
-
 import com.rakosmanjr.heliostatpower.gui.machine.ContainerMetalWorker;
 import com.rakosmanjr.heliostatpower.lib.NameMaps;
 import com.rakosmanjr.heliostatpower.lib.Textures;
 import com.rakosmanjr.heliostatpower.lib.XMLLocations;
 import com.rakosmanjr.heliostatpower.tileentity.TileBasicMetalWorker;
-
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Rectangle;
 
 public class GuiMetalWorker extends GuiContainer
 {
@@ -56,10 +51,8 @@ public class GuiMetalWorker extends GuiContainer
 	protected void drawGuiContainerForegroundLayer(int x, int y)
 	{
 		// Draw container name
-		String containerName = basicMetalWorker.isInvNameLocalized() ? basicMetalWorker
-				.getInvName() : LanguageRegistry.instance()
-				.getStringLocalization(basicMetalWorker.getInvName());
-		fontRenderer.drawString(containerName, 5, 5, 4210752);
+		String containerName = basicMetalWorker.getInventoryName();
+		this.fontRendererObj.drawString(containerName, 5, 5, 4210752);
 		
 		// Draw the machines status'
 		String millerStatus = LanguageRegistry.instance()
@@ -70,9 +63,9 @@ public class GuiMetalWorker extends GuiContainer
 				.getStringLocalization(
 						NameMaps.STATUS_NAMEMAP.get(basicMetalWorker.drawer
 								.GetStatus()));
-		
-		fontRenderer.drawString(millerStatus, 95, 58, 4210752);
-		fontRenderer.drawString(drawerStatus, 95, 121, 4210752);
+
+		this.fontRendererObj.drawString(millerStatus, 95, 58, 4210752);
+		this.fontRendererObj.drawString(drawerStatus, 95, 121, 4210752);
 		
 		// Draw the arrows
 		

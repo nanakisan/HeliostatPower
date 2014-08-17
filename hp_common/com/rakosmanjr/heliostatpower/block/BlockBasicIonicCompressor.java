@@ -14,21 +14,19 @@ import com.rakosmanjr.heliostatpower.lib.GuiIds;
 import com.rakosmanjr.heliostatpower.lib.Reference;
 import com.rakosmanjr.heliostatpower.lib.Strings;
 import com.rakosmanjr.heliostatpower.tileentity.TileBasicIonicCompressor;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockBasicIonicCompressor extends BlockHeliostat
 {
-	public BlockBasicIonicCompressor(int id)
+	public BlockBasicIonicCompressor()
 	{
-		super(id, Material.iron, Strings.IONIC_COMPRESSOR_NAME);
+		super(Material.iron, Strings.IONIC_COMPRESSOR_NAME);
 		
 		setCreativeTab(HeliostatPower.tabsHP);
 		setHardness(5F);
@@ -37,17 +35,11 @@ public class BlockBasicIonicCompressor extends BlockHeliostat
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister)
+	public void registerBlockIcons(IIconRegister iconRegister)
 	{
 		blockIcon = iconRegister.registerIcon(Reference.MOD_ID.toLowerCase() + ":" + this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".") + 1));
 	}
-	
-	@Override
-	public TileEntity createNewTileEntity(World world)
-	{
-		return new TileBasicIonicCompressor();
-	}
-	
+
 	@Override
 	public boolean renderAsNormalBlock()
 	{
@@ -61,20 +53,13 @@ public class BlockBasicIonicCompressor extends BlockHeliostat
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int id, int meta)
-	{
-		super.breakBlock(world, x, y, z, id, meta);
-	}
-	
-	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int par6, float par7, float par8, float par9)
 	{
 		if (!world.isRemote && !player.isSneaking())
 		{
-			TileBasicIonicCompressor tileCompressor = (TileBasicIonicCompressor)world
-					.getBlockTileEntity(x, y, z);
-			
+			TileBasicIonicCompressor tileCompressor = (TileBasicIonicCompressor)world.getTileEntity(x, y, z);
+
 			if (tileCompressor != null)
 			{
 				player.openGui(HeliostatPower.instance,
@@ -83,5 +68,11 @@ public class BlockBasicIonicCompressor extends BlockHeliostat
 		}
 		
 		return true;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta)
+	{
+		return new TileBasicIonicCompressor();
 	}
 }

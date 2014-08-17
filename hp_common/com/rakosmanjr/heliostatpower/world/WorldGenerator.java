@@ -9,16 +9,15 @@
  */
 package com.rakosmanjr.heliostatpower.world;
 
-import java.util.Random;
-
 import com.rakosmanjr.heliostatpower.block.ModBlocks;
-
-import net.minecraft.block.Block;
+import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import cpw.mods.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class WorldGenerator implements IWorldGenerator
 {
@@ -58,9 +57,9 @@ public class WorldGenerator implements IWorldGenerator
 				blockZ = blockZ + random.nextInt(16);
 				int blockY = world.getHeightValue(blockX, blockZ);
 				WorldGenMinable generator = new WorldGenMinable(
-						ModBlocks.sodiumNitrateCrystal.blockID,
+						ModBlocks.sodiumNitrateCrystal,
 						(int)(random.nextGaussian() * 11) + 90,
-						Block.sand.blockID);
+						Blocks.sand);
 				generator.generate(world, random, blockX, blockY, blockZ);
 			}
 		}

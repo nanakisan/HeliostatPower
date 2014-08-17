@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemAngleIron extends ItemHeliostat
 {
-	public ItemAngleIron(int id, String name)
+	public ItemAngleIron(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

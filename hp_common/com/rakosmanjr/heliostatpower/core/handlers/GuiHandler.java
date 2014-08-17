@@ -30,11 +30,11 @@ public class GuiHandler implements IGuiHandler
 		switch (Id)
 		{
 			case GuiIds.IONIC_COMPRESSOR_ID:
-				TileBasicIonicCompressor tileBasicIonicCompressor = (TileBasicIonicCompressor)world.getBlockTileEntity(x, y, z);
+				TileBasicIonicCompressor tileBasicIonicCompressor = (TileBasicIonicCompressor)world.getTileEntity(x, y, z);
 				return new ContainerIonicCompressor(player.inventory, tileBasicIonicCompressor);
 			
 			case GuiIds.METAL_WORKER_ID:
-				TileBasicMetalWorker tileBasicMetalWorker = (TileBasicMetalWorker)world.getBlockTileEntity(x, y, z);
+				TileBasicMetalWorker tileBasicMetalWorker = (TileBasicMetalWorker)world.getTileEntity(x, y, z);
 				return new ContainerMetalWorker(player.inventory, tileBasicMetalWorker);
 		}
 		
@@ -48,11 +48,11 @@ public class GuiHandler implements IGuiHandler
 		switch (Id)
 		{
 			case GuiIds.IONIC_COMPRESSOR_ID:
-				TileBasicIonicCompressor tileEntity = (TileBasicIonicCompressor)world.getBlockTileEntity(x, y, z);
+				TileBasicIonicCompressor tileEntity = (TileBasicIonicCompressor)world.getTileEntity(x, y, z);
 				return new GuiIonicCompressor(player.inventory, tileEntity);
 				
 			case GuiIds.METAL_WORKER_ID:
-				TileBasicMetalWorker tileBasicMetalWorker = (TileBasicMetalWorker)world.getBlockTileEntity(x, y, z);
+				TileBasicMetalWorker tileBasicMetalWorker = (TileBasicMetalWorker)world.getTileEntity(x, y, z);
 				return new GuiMetalWorker(player.inventory, tileBasicMetalWorker);
 		}
 		

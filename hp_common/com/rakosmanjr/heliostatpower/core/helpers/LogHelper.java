@@ -9,23 +9,17 @@
  */
 package com.rakosmanjr.heliostatpower.core.helpers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.rakosmanjr.heliostatpower.lib.Reference;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import cpw.mods.fml.common.FMLLog;
 
 public class LogHelper
 {
-	private static Logger hpLogger = Logger.getLogger(Reference.MOD_ID);
-	
-	public static void Init()
-	{
-		hpLogger.setParent(FMLLog.getLogger());
-	}
-	
-	public static void Log(Level logLevel, String message)
+	private static Logger hpLogger = LogManager.getLogger(Reference.MOD_ID);
+
+	public static void log(Level logLevel, String message)
 	{
 		hpLogger.log(logLevel, message);
 	}

@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemSodiumNitrate extends ItemHeliostat
 {
-	public ItemSodiumNitrate(int id, String name)
+	public ItemSodiumNitrate(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

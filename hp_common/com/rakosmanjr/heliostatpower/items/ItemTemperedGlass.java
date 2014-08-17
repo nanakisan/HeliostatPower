@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemTemperedGlass extends ItemHeliostat
 {
-	public ItemTemperedGlass(int id, String name)
+	public ItemTemperedGlass(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

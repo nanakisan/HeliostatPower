@@ -13,8 +13,8 @@ import com.rakosmanjr.heliostatpower.lib.Strings;
 
 public class ItemLens extends ItemHeliostat
 {
-	public ItemLens(int id, String name)
+	public ItemLens(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }

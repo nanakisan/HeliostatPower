@@ -9,12 +9,10 @@
  */
 package com.rakosmanjr.heliostatpower.items;
 
-import com.rakosmanjr.heliostatpower.lib.Strings;
-
 public class ItemMirrorSupport extends ItemHeliostat
 {
-	public ItemMirrorSupport(int id, String name)
+	public ItemMirrorSupport(String name)
 	{
-		super(id, name);
+		super(name);
 	}
 }
